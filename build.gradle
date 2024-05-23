@@ -48,7 +48,6 @@ pitest {
 		targetClasses = ['com.dojo.dojo_pitest.*']
 		excludedClasses = ['com.dojo.dojo_pitest.DojoPitestApplication', 'com.dojo.dojo_pitest.config.*', 'com.dojo.dojo_pitest.model.dto.*', 'com.dojo.dojo_pitest.entity.*', 'com.dojo.dojo_pitest.exception.*']
 		pitestVersion = 'latest.release'
-		threads = 4
 		outputFormats = ['XML', 'HTML']
 		verbose = true
 		mutators = ['STRONGER']
