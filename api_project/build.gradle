@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.dojo'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.pitest:pitest-parent:1.16.0'
+    implementation 'org.pitest:pitest-junit5-plugin:1.2.1'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pitest {
+    pitest {
+        targetClasses = ['com.dojo.*']
+        excludedClasses = []
+        pitestVersion = 'latest.release'
+        threads = 4
+        outputFormats = ['XML', 'HTML']
+        verbose = true
+        mutators = ['STRONGER']
+    }
+}

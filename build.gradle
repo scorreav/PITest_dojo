@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id 'info.solidsoft.pitest' version '1.15.0'
+	id 'info.solidsoft.pitest' version '1.15.0' apply false
 }
 
 group = 'com.dojo'
@@ -43,14 +43,15 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-pitest {
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'info.solidsoft.pitest'
+
 	pitest {
-		targetClasses = ['com.dojo.dojo_pitest.*']
-		excludedClasses = ['com.dojo.dojo_pitest.DojoPitestApplication', 'com.dojo.dojo_pitest.config.*', 'com.dojo.dojo_pitest.model.dto.*', 'com.dojo.dojo_pitest.entity.*', 'com.dojo.dojo_pitest.exception.*']
-		pitestVersion = 'latest.release'
 		threads = 4
-		outputFormats = ['XML', 'HTML']
-		verbose = true
-		mutators = ['STRONGER']
+
+		if (project.name in ['module-without-any-test']) {
+			failWhenNoMutations = false
+		}
 	}
 }

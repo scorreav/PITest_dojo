@@ -1,1 +1,4 @@
 rootProject.name = 'dojo_pitest'
+include 'backend_project'
+include 'api_project'
+
